@@ -1,0 +1,2 @@
+# templating
+Templates is a eclipse plug for templating and can be used any eclipse project with out the need of maven; analog maven archetypes. It is based on apache velocity engine. The templates can be hold in local filesystem or svn with http access; so any developer in a company can access the templates from a central repository. This plug in alos helps to create a new template by providing some substitutions like "Template" -> ${componentName} or ..template.. -> ..${packagePart}.
