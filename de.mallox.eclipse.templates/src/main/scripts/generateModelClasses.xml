@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="generateModelClasses" default="xjc" basedir="../..">
+
+	<property name="xjc" value="/System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands/xjc" />
+	<!--
+	<property name="xjc" value="C:/Program Files/Java/jdk1.8.0_60/bin/xjc.exe" />
+	-->
+	<property name="src.gen.java.dir" value="${basedir}/gen/java/" />
+	<property name="src.main.resources.dir" value="${basedir}/main/resources/" />
+
+	<target name="xjc" description="....">
+		<!--
+			Alte files löschen:
+		-->
+		<delete includeemptydirs="true">
+			<fileset dir="${src.gen.java.dir}" includes="**/*" />
+		</delete>
+		
+		<exec executable="${xjc}">
+			<arg value="-d" />
+			<arg value="${src.gen.java.dir}" />
+			<arg value="-p" />
+			<arg value="de.mallox.eclipse.templates.model" />
+			<arg value="${src.main.resources.dir}/template-index.xsd" />
+		</exec>
+		
+		<exec executable="${xjc}">
+			<arg value="-d" />
+			<arg value="${src.gen.java.dir}" />
+			<arg value="-p" />
+			<arg value="de.mallox.eclipse.templates.model.template" />
+			<arg value="${src.main.resources.dir}/template.xsd" />
+		</exec>
+	</target>
+</project>

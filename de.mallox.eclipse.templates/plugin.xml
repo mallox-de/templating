@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="org.eclipse.jdt.ui.java"
+            class="de.mallox.eclipse.templates.wizards.templates.TemplatesWizard"
+            finalPerspective="org.eclipse.jdt.ui.JavaPerspective"
+            icon="icons/1455600725_copy.ico"
+            id="de.mallox.eclipse.templates.wizards.templates.TemplatesWizard"
+            name="Templates">
+         <description>
+            Erzeugt aus einem Template entsprechende Projekte.
+         </description>
+      </wizard>
+      <wizard
+            category="org.eclipse.jdt.ui.java"
+            class="de.mallox.eclipse.templates.wizards.create.CreateTemplateWizard"
+            finalPerspective="org.eclipse.jdt.ui.JavaPerspective"
+            icon="icons/velocity.ico"
+            id="de.mallox.eclipse.templates.wizards.create.CreateTemplateWizard"
+            name="create Template">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="de.mallox.eclipse.templates.preferences.TemplatesPreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="de.mallox.eclipse.templates.preferences.TemplatesPreferencePage"
+            id="de.mallox.eclipse.templates.preferences.TemplatesPreferencPage"
+            name="Templates">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.eclipse.debug.ui.category.run"
+            defaultHandler="de.mallox.eclipse.templates.commands.RunTemplateHandler"
+            id="de.mallox.eclipse.templates.run-template"
+            name="Run Template">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            base-type="org.eclipse.core.runtime.text"
+            default-charset="UTF-8"
+            file-extensions="tconf"
+            id="de.mallox.eclipse.templates.content-type-templateConfiguration"
+            name="TemplateConfiguration"
+            priority="normal">
+      </content-type>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <command
+               commandId="de.mallox.eclipse.templates.run-template"
+               label="Run Template"
+               style="push"
+               tooltip="führt das Template mit den Angaben aus dem selektierten File aus.">
+         </command>
+      </menuContribution>
+   </extension>
+
+</plugin>

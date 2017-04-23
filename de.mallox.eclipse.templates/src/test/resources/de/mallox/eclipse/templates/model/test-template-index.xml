@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template-index xmlns="http://www.mallox.de/schema/template-index" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mallox.de/schema/template-index ../../main/resources/template-index.xsd "
+name="Test-Template-Index"
+>
+  <description>Diese Templates werden nur für einen Funktionstest verwendet.</description>
+  <template-ref name="Template1" baseurl="file:///Users/ted/git/templates/de.mallox.eclipse.templates/src/test/resources/de/mallox/eclipse/templates/model/template/" file="test-template.xml">
+  <!-- 
+   -->
+    <description>Test-Template1</description>
+  </template-ref>
+</template-index>
