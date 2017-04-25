@@ -102,6 +102,11 @@
 									<artifactId>commons-lang3</artifactId>
 									<version>3.5</version>
 								</item>
+								<item>
+									<groupId>commons-collections</groupId>
+									<artifactId>commons-collections</artifactId>
+									<version>3.2.2</version>
+								</item>
 							</artifactItems>
 							<outputDirectory>libs</outputDirectory>
 							<stripVersion>true</stripVersion>
