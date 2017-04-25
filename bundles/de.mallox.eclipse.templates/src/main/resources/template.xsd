@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.mallox.de/schema/template" xmlns:tns="http://www.mallox.de/schema/template"
+	elementFormDefault="qualified">
+
+	<xs:annotation>
+		<xs:documentation>Im Template werden die verschiedenen Resourcen des
+			Templates beschrieben. Template-Prozessor ist Velocity und es stehen
+			folgende
+			Generic Tools zur Verfügung: ComparisonDateTool ("$date"),
+			DisplayTool ("$display") und ConversionTool ("$convert").
+			Unter
+			TemplateVersion kann die Version des Template abgefragt werden.
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:element name="template">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Ein Template kann ein oder mehrere Projekte
+					umfassen.
+				</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="description" type="xs:string"
+					minOccurs="1" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>Beschreibt wozu dieses Template verwendet werden
+							kann.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="variable" type="tns:variable"
+					minOccurs="0" maxOccurs="unbounded" />
+				<xs:element name="variableCombinations" type="tns:variableCombination"
+					minOccurs="0" maxOccurs="unbounded" />
+				<xs:element name="project-template" type="tns:projectTemplate"
+					minOccurs="1" maxOccurs="unbounded" />
+				<xs:element name="velocityTools" type="tns:velocityTool"
+					minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Class-Name des VelocityTool, welches relativ zum
+							Template-URI unter velocityTools liegt.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Name, unter dem das Projekt angelegt werden soll.
+						Im Namen können Platzhalter enthalten sein, die über die
+						angegebenen variablen aufgelöst werden müssen.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="version" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Version dieses Templates.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="generatorVersion" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Version des Template-Generator, mit dem das Template erstellt wurde. Format: "(major).(minor).(service)".
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="variable">
+		<xs:annotation>
+			<xs:documentation>Beschreibt wozu diese Variable dient.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="description" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Gibt an, wozu dieses Variable genutzt werden
+						soll.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Name der Variable.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="type">
+			<xs:annotation>
+				<xs:documentation>Gibt den Typ der Variable an.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="boolean"></xs:enumeration>
+					<xs:enumeration value="string"></xs:enumeration>
+					<xs:enumeration value="int"></xs:enumeration>
+					<xs:enumeration value="stringArray"></xs:enumeration>
+					<xs:enumeration value="projectFolder"></xs:enumeration>
+					<xs:enumeration value="projectFile"></xs:enumeration>
+					<xs:enumeration value="projectFileArray"></xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="default" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Defaultwert, der bei der Abfrage der Variablen
+					vorbelegt werden soll.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="optional" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation>Gibt an, ob diese Variable optional ist. Der
+					Defaultwert ist false. Achtung: Sollte eine optionale Variable in
+					einer "variableCombination" verwendet werden, muss berücksichtigt
+					werden, dass dieser Wert u.U. nicht vorhanden ist.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="variableCombination">
+		<xs:annotation>
+			<xs:documentation>Beschreibt wie verschiedene Variablen zu einer
+				neuen Variablen zusamamen gesetzt werden können.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="description" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Gibt an, wozu diese Varable genutzt werden soll.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Name der Variable.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="type">
+			<xs:annotation>
+				<xs:documentation>Gibt den Typ der Variable an.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="boolean"></xs:enumeration>
+					<xs:enumeration value="string"></xs:enumeration>
+					<xs:enumeration value="int"></xs:enumeration>
+					<xs:enumeration value="stringarray">
+						<xs:annotation>
+							<xs:documentation>Example: ["a", "b, "c"]</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="pattern" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Muster, in dem verschiedene Variablen angegeben
+					werden können. Das Format entspricht dabei dem von Velocity.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="projectTemplate">
+		<xs:annotation>
+			<xs:documentation>Beschreibt ein Projekt, welches im Rahmen des
+				Templates angelegt werden soll.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="description" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Gibt an, wozu dieses Projekt-Template dient.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="projectDescription" type="tns:projectDescription"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Eclipse spezifische angaben, die in der
+						.project-Datei stehen.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="classpathentries" type="tns:classpathentry"
+				minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Eclipse spezifische angaben, die in der
+						.classpath-Datei stehen.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="files" type="tns:file" minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Dateien, die kopiert werden sollen.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="launcher" type="xs:string" minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Launcher, die nach dem Erzeugen des Projekts
+						aufgerufen werden sollen.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Name, unter dem das Projekt angelegt werden soll.
+					Im Namen können Platzhalter enthalten sein, die über die
+					angegebenen variablen aufgelöst werden müssen.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="encoding" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Encoding für das Projekt. Einzelne Dateien können dieses Encoding überschreiben.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="condition" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Velocity-Ersetzung, über die bestimmt werden kann,
+					ob dieses Projekt angezogen werden soll, oder nicht.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="conditionValue" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Wert, mit dem verglichen werden soll.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="alreadyExists" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation>Bei true wird das Projekt nicht angelegt, es muss
+					schon im Workspace existieren. Der Default ist false.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="compileWorkspace" type="xs:boolean"
+			use="optional">
+			<xs:annotation>
+				<xs:documentation>Bei true wird der Workspace nach dem diesem
+					ProjectTemplate compiliert. Der Default ist false.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="projectDescription">
+		<xs:annotation>
+			<xs:documentation>Eclipse spezifische angaben, die in der
+				.project-Datei stehen.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="projectDependencies" type="xs:string"
+				minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Hiermit können Referenzen auf andere
+						Eclipse-Projekte angegeben werden.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="buildCommand" type="tns:buildCommand"
+				minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Hiermit können Eclipse-Builder angegeben werden.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nature" type="xs:string" minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Hiermit können Eclipse-Natures angegeben werden.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="buildCommand">
+		<xs:annotation>
+			<xs:documentation>Eclipse spezifische angaben, die in der
+				.project-Datei stehen.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="attribute" type="tns:attribute"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
+	</xs:complexType>
+
+	<xs:complexType name="classpathentry">
+		<xs:annotation>
+			<xs:documentation>Eclipse spezifische angaben, die in der
+				.project-Datei stehen.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="attribute" type="tns:attribute"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="kind" type="xs:string" />
+		<xs:attribute name="path" type="xs:string" />
+	</xs:complexType>
+
+	<xs:complexType name="attribute">
+		<xs:annotation>
+			<xs:documentation>Eclipse spezifische angaben zum classpathentry bzw.
+				buildCommand, die in der .project-Datei stehen.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="value" type="xs:string" />
+	</xs:complexType>
+
+	<xs:complexType name="file">
+		<xs:annotation>
+			<xs:documentation>Datei, die kopiert werden soll.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="src" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Die Quelle wird relativ zur Template-URL
+					angegeben.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="dest" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Ziel innerhalb des neuen Projekts.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="encoding" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Encoding für die zu kopierende Datei, wenn sie vom Projekt Encoding abweicht.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="condition" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Velocity-Ersetzung, über die bestimmt werden kann,
+					ob diese File angezogen werden soll, oder nicht.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="conditionValue" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Wert, mit dem verglichen werden soll.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="velocityTool">
+		<xs:annotation>
+			<xs:documentation>Beschreibung eines VelocityTools, welches relativ
+				zur template.xml unter velocityTools liegt.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="className" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Klasse, die als VelocityTool verwendet werden
+					soll.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="velocityName" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Name unter der die Klasse in den Velocity-Template
+					bekannt gemacht werden soll.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="encoding" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Encoding der Java-Klasse.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>		
+	</xs:complexType>
+
+</xs:schema>

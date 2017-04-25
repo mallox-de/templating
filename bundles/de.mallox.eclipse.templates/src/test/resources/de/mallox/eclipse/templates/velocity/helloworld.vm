@@ -1,0 +1,10 @@
+Hello ${name}!  Welcome to Velocity!
+
+${boolean}
+
+#if($boolean)
+test boolean: true!
+#else
+test boolean: false!
+#end
+

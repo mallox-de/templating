@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template name="TestTemplate2" xmlns="http://www.mallox.de/schema/template"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mallox.de/schema/template ../../../../../../../../main/resources/template.xsd ">
+	<description>description</description>
+
+	<variable default="Template2" name="ComponentName">
+		<description>ComponentName</description>
+	</variable>
+
+	<project-template name="TestJava2">
+		<description>Projekt-Template</description>
+
+		<projectDescription>
+			<projectDependencies>ExternalGuiceJava</projectDependencies>
+			<buildCommand name="org.eclipse.jdt.core.javabuilder"></buildCommand>
+			<nature>org.eclipse.jdt.core.javanature</nature>
+		</projectDescription>
+
+		<classpathentries kind="src" path="src/main/java" />
+		
+		<files src="test-template.xml" dest="test/test-template.xml"/>
+		
+	</project-template>
+
+	<velocityTools className="de.mallox.velocity.TestTool" velocityName="TestTool" />
+		
+</template>
