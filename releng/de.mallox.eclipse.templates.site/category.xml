@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/de.mallox.eclipse.templates.feature_1.2.0.jar" id="de.mallox.eclipse.templates.feature" version="1.2.0.qualifier">
+      <category name="templates"/>
+   </feature>
+   <category-def name="templates" label="Templating"/>
+</site>

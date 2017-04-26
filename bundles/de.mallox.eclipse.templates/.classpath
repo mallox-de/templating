@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins">
+		<accessrules>
+			<accessrule kind="accessible" pattern="org/eclipse/core/internal/**"/>
+			<accessrule kind="accessible" pattern="org/eclipse/jdt/internal/**"/>
+			<accessrule kind="accessible" pattern="org/eclipse/ui/internal/**"/>
+		</accessrules>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="bin" sourcepath="bin"/>
+	<classpathentry exported="true" kind="lib" path="libs/velocity.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/velocity-tools.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/mapstruct.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/commons-codec.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/commons-collections.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/commons-logging.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/fluent-hc.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/httpclient.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/httpclient-cache.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/httpclient-win.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/httpcore.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/httpmime.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/jna.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/jna-platform.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/opencsv.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/commons-lang3.jar"/>
+	<classpathentry kind="src" path="src/gen/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

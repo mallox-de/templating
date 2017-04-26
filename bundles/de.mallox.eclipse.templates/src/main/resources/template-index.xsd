@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.mallox.de/schema/template-index" xmlns:tns="http://www.mallox.de/schema/template-index"
+	elementFormDefault="qualified">
+
+	<xs:annotation>
+		<xs:documentation>Template-Index zur Registrierung von Templates
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:element name="template-index">
+
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Index über den verschiedene Templates gruppiert
+					werden können.
+				</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="description" type="xs:string"
+					minOccurs="1" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>Beschreibt welche Templates über diesen
+							template-index gruppiert werden.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="template-ref" type="tns:templateRef"
+					minOccurs="1" maxOccurs="unbounded" />
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Name, unter der die Templates in diesem
+						template-index gruppiert werden sollen.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="templateRef">
+		<xs:annotation>
+			<xs:documentation>Beschreibt ein Template.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="name" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Name des Templates, wie er im Wizard angezeigt
+					werden soll.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="baseurl" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Quelle des Templates.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="file" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Dateiname des Templates.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

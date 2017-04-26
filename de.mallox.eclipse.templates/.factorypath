@@ -1,4 +1,0 @@
-<factorypath>
-    <factorypathentry kind="WKSPJAR" id="/de.mallox.eclipse.templates/libs/mapstruct-1.0.0.Final.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="WKSPJAR" id="/de.mallox.eclipse.templates/libs/mapstruct-processor-1.0.0.Final.jar" enabled="true" runInBatchMode="false"/>
-</factorypath>
