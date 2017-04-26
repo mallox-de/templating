@@ -8,11 +8,6 @@
 			<accessrule kind="accessible" pattern="org/eclipse/ui/internal/**"/>
 		</accessrules>
 	</classpathentry>
-	<classpathentry kind="src" path="src/main/java"/>
-	<classpathentry kind="src" path="src/gen/java"/>
-	<classpathentry kind="src" path="src/test/java"/>
-	<classpathentry kind="src" path="src/main/resources"/>
-	<classpathentry kind="src" path="src/test/resources"/>
 	<classpathentry exported="true" kind="lib" path="bin" sourcepath="bin"/>
 	<classpathentry exported="true" kind="lib" path="libs/velocity.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/velocity-tools.jar"/>
@@ -30,5 +25,10 @@
 	<classpathentry exported="true" kind="lib" path="libs/jna-platform.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/opencsv.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/commons-lang3.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="src" path="src/gen/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>
