@@ -1,13 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.mallox.eclipse.templates</groupId>
 	<artifactId>de.mallox.eclipse.templates.configuration</artifactId>
-	<version>1.2.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>pom</packaging>
 
 	<properties>
-		<tycho.version>0.26.0</tycho.version>
+		<tycho.version>1.0.0</tycho.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<helios-repo.url>http://download.eclipse.org/releases/helios</helios-repo.url>
 	</properties>
@@ -20,6 +21,12 @@
 		</repository>
 
 	</repositories>
+
+	<scm>
+		<url>https://github.com/mallox-de/templating</url>
+		<connection>scm:git:ssh://git@github.com:mallox-de/templating.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:mallox-de/templating.git</developerConnection>
+	</scm>
 
 	<build>
 		<plugins>
@@ -64,6 +71,24 @@
 					</environments>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-versions-plugin</artifactId>
+				<version>${tycho.version}</version>
+			</plugin>
 		</plugins>
+
+
 	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>bintray-mallox-de-de.mallox.templates</id>
+			<name>mallox-de-de.mallox.templates</name>
+			<url>https://api.bintray.com/maven/mallox-de/de.mallox.templates/p2/;publish=1</url>
+			<!-- <url>https://api.bintray.com/maven/${bintray.subject}/${bintray.repo}/${bintray.package}/;publish=1</url> -->
+		</repository>
+	</distributionManagement>
+
 </project>
